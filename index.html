@@ -26,8 +26,24 @@ body.studentMode #studentIntro{display:block;width:min(760px,92%);margin:0 auto;
 body.studentMode #studentPlay{display:block;width:100%;margin:0;background:#79d85b;color:#102744;font-size:clamp(18px,2.5vw,24px);padding:14px}
 @media(max-width:760px){body.studentMode .app{width:calc(100vw - 16px);min-height:calc(100vh - 16px);margin:8px auto;padding:14px}body.studentMode .logo{margin-bottom:18px}body.studentMode #studentIntro{width:100%;padding:24px 14px}}
 
+
+/* Boring Teacher Vocabulary Menu v1.0 */
+.teacherMenu{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:12px;align-items:start}
+.settingsFields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.fieldLabel{font:900 12px "Courier New";color:#294361;margin:0 0 5px;text-transform:uppercase}
+.menuButton{width:100%;margin:8px 0 0}.teacherHowTo{margin-top:12px;padding:10px;background:#fff8d9;border:3px solid #152945}.teacherHowTo summary{cursor:pointer;font:900 13px "Courier New";color:#152945}.teacherHowTo div{font:700 11px "Courier New";line-height:1.5;margin-top:8px}
+.vocabCard textarea{margin-top:10px}.shareBlock{margin-top:12px;padding-top:12px;border-top:3px solid #152945}#shareStudentLink{font-size:16px;padding:12px}.finalPlay{margin:14px 0 0;padding:14px;font-size:20px}
+body.studentMode #menu>.teacherMenu{display:none!important}
+@media(max-width:760px){.teacherMenu{grid-template-columns:1fr;gap:10px}.settingsFields{grid-template-columns:1fr}.card{padding:12px}textarea{height:34vh;min-height:210px;font-size:16px}select{min-height:48px;font-size:16px}button{min-height:48px}#shareStudentLink,.finalPlay{min-height:56px}}
 </style></head><body><main class="app"><div class="logo">WORD FROG</div>
-<section id="menu" class="screen active"><div id="studentIntro"><div class="studentTitle" id="studentSetTitle">VOCABULARY SET</div><div class="studentMeta" id="studentSetMeta">READY TO PLAY</div><button id="studentPlay" class="primary" type="button" disabled>PLAY</button><details class="howTo"><summary>▶ HOW TO PLAY</summary><div>↑ / W = jump forward · ↓ / S = jump back · SPACE = accelerate<br>Mobile: FORWARD / BACK / BOOST. Ride the stones with the correct words.</div></details></div><div class="grid teacherOnly"><div class="card"><h2>GAME SETTINGS</h2><div class="help">Choose the pronunciation language and a vocabulary list.</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:7px"><div><div class="help"><b>Language</b></div><select id="language"><option value="de-DE">German</option><option value="es-ES">Spanish</option><option value="da-DK">Danish</option><option value="en-US">English</option></select></div><div><div class="help"><b>Vocabulary</b></div><select id="category"></select></div></div><div id="voiceCheck" class="preview"><b>VOICE:</b> checking…</div><button id="testVoice" class="yellow" type="button">🔊 TEST VOICE</button><div class="preview"><b>Controls</b><br>↑ / W = jump forward<br>↓ / S = jump back<br>SPACE = accelerate<br>P = pause<br><br>Ride the moving stones and choose the correct word.</div><button id="play" class="primary wide">PLAY</button></div><div class="card"><h2>PASTE QUIZLET WORDS</h2><div class="help">Paste term/definition pairs. Built-in lists remain completely editable.</div><textarea id="words">gucken	to watch, to look at
+<section id="menu" class="screen active"><div id="studentIntro"><div class="studentTitle" id="studentSetTitle">VOCABULARY SET</div><div class="studentMeta" id="studentSetMeta">READY TO PLAY</div><button id="studentPlay" class="primary" type="button" disabled>PLAY</button><details class="howTo"><summary>▶ HOW TO PLAY</summary><div>↑ / W = jump forward · ↓ / S = jump back · SPACE = accelerate<br>Mobile: FORWARD / BACK / BOOST. Ride the stones with the correct words.</div></details></div><div class="teacherMenu teacherOnly">
+  <div class="card settingsCard"><h2>GAME SETTINGS</h2><div class="help">Choose the language and vocabulary you want to practise.</div>
+    <div class="settingsFields"><div><div class="fieldLabel">Language</div><select id="language"><option value="de-DE">German</option><option value="es-ES">Spanish</option><option value="da-DK">Danish</option><option value="en-US">English</option></select></div><div><div class="fieldLabel">Vocabulary</div><select id="category"></select></div></div>
+    <div id="voiceCheck" class="preview"><b>VOICE:</b> checking…</div>
+    <button id="testVoice" class="yellow menuButton" type="button">🔊 TEST VOICE</button>
+    <details class="teacherHowTo"><summary>▶ HOW TO PLAY</summary><div>↑ / W = jump forward · ↓ / S = jump back · SPACE = accelerate<br>Mobile: FORWARD / BACK / BOOST. Ride the stones with the correct words.</div></details>
+  </div>
+  <div class="card vocabCard"><h2>YOUR VOCABULARY</h2><div class="help">Use a ready-made list above, or paste/edit your own Quizlet-style term and definition pairs.</div>
+    <textarea id="words">gucken	to watch, to look at
 fahren	to drive
 essen	to eat
 trinken	to drink
@@ -38,7 +54,11 @@ sprechen	to speak
 gehen	to go
 kommen	to come
 spielen	to play
-lernen	to learn</textarea><div class="setupStep teacherOnly"><div class="stepTitle">3 · PLAY OR SHARE</div><div class="stepHint">Share exactly the vocabulary currently shown in the box — built-in, custom, or edited.</div><div class="shareRow"><button id="createStudentLink" class="pink" type="button">🔗 CREATE STUDENT LINK</button><button id="copyStudentLink" type="button">📋 COPY LINK</button></div><div class="stepHint" id="shareStatus">The student link opens Frog with this vocabulary already loaded.</div></div><button id="swap">⇄ SWAP SIDES</button><div id="preview" class="preview"></div><div id="error" class="error"></div></div>
+lernen	to learn</textarea>
+    <button id="swap" type="button" class="menuButton">⇄ SWAP SIDES</button><div id="preview" class="preview"></div><div id="error" class="error"></div>
+    <div class="shareBlock"><button id="shareStudentLink" class="pink menuButton" type="button">🔗 SHARE WITH STUDENTS</button><div class="stepHint" id="shareStatus">Creates a permanent student link for exactly the vocabulary shown above.</div></div>
+    <button id="play" class="primary wide finalPlay teacherOnly" type="button">PLAY</button>
+  </div>
 </div></section>
 <section id="game" class="screen"><div class="hud"><div>SCORE <span id="score">0</span> · <span id="lives">❤❤❤</span></div><div id="target" class="target"></div><div id="progress" class="progress"></div></div><div id="wrap" class="wrap"><canvas id="canvas"></canvas><div id="toast" class="toast"></div><div id="pauseOverlay" class="overlay"><div class="big" style="color:#f3d64e">PAUSED</div></div><div id="gameOver" class="overlay"><div><div class="big">GAME OVER</div><div class="msg">Nice try, your grandma would be proud</div><button id="again" class="primary">PLAY AGAIN</button><button id="overMenu" class="pink">MAIN MENU</button></div></div></div><div class="buttons"><button id="pause" class="yellow">PAUSE</button><button id="restart">RESTART</button><button id="mainMenu" class="pink">MAIN MENU</button><button id="sound">🔊 SOUND ON</button></div><div class="mobile-controls" aria-label="Touch controls"><button id="touchForward" class="forward" type="button">▲ FORWARD</button><button id="touchBack" class="back" type="button">▼ BACK</button><button id="touchBoost" class="boost" type="button">⚡ BOOST (HOLD)</button></div><div class="tip">FORWARD: ↑ / W · BACK: ↓ / S · BOOST: SPACE · PAUSE: P</div></section></main>
 <script>
@@ -150,7 +170,7 @@ async function createStudentLink(){
   }
   if(sharingBusy)return;
   sharingBusy=true;
-  var button=E("createStudentLink");
+  var button=E("shareStudentLink");
   var oldText=button.textContent;
   button.disabled=true;
   button.textContent="SAVING…";
@@ -182,12 +202,12 @@ async function createStudentLink(){
     u.hash="set="+encodeURIComponent(setId);
     lastStudentLink=u.toString();
 
-    E("copyStudentLink").style.display="block";
+    
     E("shareStatus").textContent="✓ STUDENT LINK READY — permanent set "+setId+" · "+pairs.length+" words.";
   }catch(err){
     console.error("Could not create vocabulary set:",err);
     lastStudentLink="";
-    E("copyStudentLink").style.display="none";
+    
     E("shareStatus").textContent="Could not save this set. Please try again.";
   }finally{
     sharingBusy=false;
@@ -269,8 +289,7 @@ async function loadStudentSet(){
   }
 }
 
-E("createStudentLink").onclick=createStudentLink;
-E("copyStudentLink").onclick=copyStudentLink;
+E("shareStudentLink").onclick=async function(){await createStudentLink();if(lastStudentLink){await copyStudentLink();var b=this;b.textContent="✓ LINK COPIED";setTimeout(function(){b.textContent="🔗 SHARE WITH STUDENTS"},1600)}};
 E("studentPlay").onclick=function(){if(!this.disabled)E("play").click()};
 window.addEventListener("hashchange",loadStudentSet);
 window.addEventListener("resize",resize);cats(false);preview();loadStudentSet();
