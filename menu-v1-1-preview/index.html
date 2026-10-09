@@ -243,7 +243,8 @@ async function createStudentLink(){
     lastStudentLink=u.toString();
 
     
-    E("shareStatus").textContent="✓ LINK READY: "+lastStudentLink;\n    try{await navigator.clipboard.writeText(lastStudentLink)}catch(copyErr){}
+    E("shareStatus").textContent="✓ LINK READY: "+lastStudentLink;
+    try{await navigator.clipboard.writeText(lastStudentLink)}catch(copyErr){}
   }catch(err){
     console.error("Could not create vocabulary set:",err);
     lastStudentLink="";
